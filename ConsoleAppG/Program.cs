@@ -127,16 +127,42 @@ public class Program
                                 //Console.Write(gameAray[row, column
                             }
 
+
+                            strokiList.Add(linenew);
+
                             Console.WriteLine(String.Join(" ", inputsrt));
+
 
 
                             //Console.WriteLine("Xcount" + Xcount);
 
-                            //strokiList.Add(new Line(Xcount, zeroCount));
                             //Console.WriteLine("strokiList " + strokiList.Count);
                         }
 
-                      //  Console.WriteLine(Xcount + "  " + zeroCount);
+                        Console.WriteLine("кресты");
+
+                        stolbikiList.Add(stolb0);
+                        stolbikiList.Add(stolb1);
+                        stolbikiList.Add(stolb2);
+
+                        for (int listIndex = 0; listIndex < 3; listIndex++)
+                        {
+                            Console.Write(stolbikiList.ElementAt(listIndex).hX + "");
+
+                        }
+
+
+                        Console.WriteLine("нули");
+
+                        for (int listIndex = 0; listIndex < 3; listIndex++)
+                        {
+                            Console.Write(stolbikiList.ElementAt(listIndex).h0 + "");
+
+                        }
+
+                        Console.WriteLine();
+
+                        //  Console.WriteLine(Xcount + "  " + zeroCount);
                         //Console.WriteLine(result?"TRUE":"FALSE");
 
 
