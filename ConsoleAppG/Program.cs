@@ -130,7 +130,7 @@ public class Program
 
                             strokiList.Add(linenew);
 
-                            Console.WriteLine(String.Join(" ", inputsrt));
+                            Console.WriteLine(String.Join(" ", inputsrt) + " |x:" + linenew.hX + " 0:" + linenew.h0);
 
 
 
@@ -138,13 +138,16 @@ public class Program
 
                             //Console.WriteLine("strokiList " + strokiList.Count);
                         }
-
+                        /*
+                        Console.WriteLine();
                         Console.WriteLine("кресты");
+                        */
 
                         stolbikiList.Add(stolb0);
                         stolbikiList.Add(stolb1);
                         stolbikiList.Add(stolb2);
 
+                        Console.WriteLine("---");
                         for (int listIndex = 0; listIndex < 3; listIndex++)
                         {
                             Console.Write(stolbikiList.ElementAt(listIndex).hX + "");
@@ -152,7 +155,7 @@ public class Program
                         }
 
 
-                        Console.WriteLine("нули");
+                        Console.WriteLine("\n---");
 
                         for (int listIndex = 0; listIndex < 3; listIndex++)
                         {
