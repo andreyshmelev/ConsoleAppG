@@ -19,60 +19,56 @@ public class Program
             h0 = howManyZeros;
         }
     }
-    public struct Stolbik
-    {
-
-        public int hX = 0;
-        public int h0 = 0;
-
-        public Stolbik(int howManyCrosses, int howManyZeros)
-        {
-            hX = howManyCrosses;
-            h0 = howManyZeros;
-        }
-    }
 
     public static void Main(string[] args)
     {
-        using (StreamReader file = new StreamReader("C:\\Users\\Brux\\Downloads\\testG\\tests\\01"))
+        // using (StreamReader file = new StreamReader("C:\\Users\\Brux\\Downloads\\testG\\tests\\05"))
         {
-            var countDataSets = int.Parse(file.ReadLine());
+            var countDataSets = int.Parse(Console.ReadLine());
             {
-                Console.WriteLine("countDataSets  " + countDataSets);
+                //console.writeLine("countDataSets  " + countDataSets);
 
                 for (int i = 0; i < countDataSets; i++)
                 {
-                    
-                    if (string.IsNullOrEmpty(file.ReadLine()))
+
+                    if (string.IsNullOrEmpty(Console.ReadLine()))
 
                     {
                         List<Line> strokiList = new List<Line>();
-                        List<Stolbik> stolbikiList = new List<Stolbik>();
+                        List<Line> stolbciList = new List<Line>();
 
                         bool result = true;
 
                         char[,] gameAray = new char[3, 3];
 
-                        var Xcount = 0;
-                        var zeroCount = 0;
+                        Line stolb0 = new Line(0, 0);
+                        Line stolb1 = new Line(0, 0);
+                        Line stolb2 = new Line(0, 0);
 
-                        Stolbik stolb0 = new Stolbik(0, 0);
-                        Stolbik stolb1 = new Stolbik(0, 0);
-                        Stolbik stolb2 = new Stolbik(0, 0);
+                        Line diagonal1 = new Line(0, 0);
+                        Line diagonal2 = new Line(0, 0);
 
-
+                        var indexfordiagonal = 0;
                         for (int row = 0; row < 3; row++)
                         {
-                            string inputsrt = (file.ReadLine());
-                            
+                            string inputsrt = (Console.ReadLine());
+
                             // проверяем каждую строку и создаем структуру строки
 
                             Line linenew = new Line(0, 0);
 
                             for (int column = 0; column < 3; column++)
                             {
+
                                 char inputchar = inputsrt[column];
                                 gameAray[row, column] = inputchar;
+
+                                // проверка диагонали
+
+                                if ((column == 0) && (row == 0))
+                                {
+
+                                }
 
                                 switch (inputchar)
                                 {
@@ -84,16 +80,35 @@ public class Program
                                             stolb0.hX++;
                                         }
                                         else
-                                             if (column == 1)
+                                        if (column == 1)
                                         {
                                             stolb1.hX++;
                                         }
                                         else
-                                             if (column == 2)
+                                        if (column == 2)
                                         {
                                             stolb2.hX++;
                                         }
 
+                                        // если слева сверху вправо вниз диагональ
+                                        if (indexfordiagonal == 0 || indexfordiagonal == 8)
+                                        {
+                                            diagonal1.hX++;
+                                        }
+
+                                        // если справа сверху влево вниз диагональ
+                                        if (indexfordiagonal == 2 || indexfordiagonal == 6)
+                                        {
+                                            diagonal2.hX++;
+                                        }
+
+                                        // если по центру ячейка
+                                        if (indexfordiagonal == 4)
+                                        {
+
+                                            diagonal1.hX++;
+                                            diagonal2.hX++;
+                                        }
 
                                         break;
 
@@ -104,191 +119,127 @@ public class Program
                                             stolb0.h0++;
                                         }
                                         else
-                                            if (column == 1)
+                                        if (column == 1)
                                         {
                                             stolb1.h0++;
                                         }
                                         else
-                                            if (column == 2)
+                                        if (column == 2)
                                         {
                                             stolb2.h0++;
                                         }
+
+                                        // если слева сверху вправо вниз диагональ
+                                        if (indexfordiagonal == 0 || indexfordiagonal == 8)
+                                        {
+                                            diagonal1.h0++;
+                                        }
+
+                                        // если справа сверху влево вниз диагональ
+                                        if (indexfordiagonal == 2 || indexfordiagonal == 6)
+                                        {
+                                            diagonal2.h0++;
+                                        }
+
+                                        // если по центру ячейка
+                                        if (indexfordiagonal == 4)
+                                        {
+
+                                            diagonal1.h0++;
+                                            diagonal2.h0++;
+                                        }
+
                                         break;
                                 }
-
-                                /* if  (   (Xcount > zeroCount + 1)
-                                     ||  (Xcount + 1 < zeroCount)
-                                     ||  (Xcount == zeroCount)
-                                     )
-                                         {
-                                     result = false;
-                                 }*/
-
-                                //Console.Write(gameAray[row, column
+                                indexfordiagonal++;
                             }
-
 
                             strokiList.Add(linenew);
 
-                            Console.WriteLine(String.Join(" ", inputsrt) + " |x:" + linenew.hX + " 0:" + linenew.h0);
-
-
-
-                            //Console.WriteLine("Xcount" + Xcount);
-
-                            //Console.WriteLine("strokiList " + strokiList.Count);
-                        }
-                        /*
-                        Console.WriteLine();
-                        Console.WriteLine("кресты");
-                        */
-
-                        stolbikiList.Add(stolb0);
-                        stolbikiList.Add(stolb1);
-                        stolbikiList.Add(stolb2);
-
-                        Console.WriteLine("---");
-                        for (int listIndex = 0; listIndex < 3; listIndex++)
-                        {
-                            Console.Write(stolbikiList.ElementAt(listIndex).hX + "");
-
+                         //   Console.WriteLine(String.Join(" ", inputsrt) + " |x:" + linenew.hX + " 0:" + linenew.h0);
                         }
 
+                        stolbciList.Add(stolb0);
+                        stolbciList.Add(stolb1);
+                        stolbciList.Add(stolb2);
 
-                        Console.WriteLine("\n---");
+                        //  ну все у нас есть структуры и есть данные . проверяем на вшивость
 
-                        for (int listIndex = 0; listIndex < 3; listIndex++)
+                        var alltotalX = 0;
+                        var alltotalZero = 0;
+
+                        for (var iterator1 = 0; iterator1 < 3; iterator1++)
                         {
-                            Console.Write(stolbikiList.ElementAt(listIndex).h0 + "");
-
+                            alltotalX += strokiList.ElementAt(iterator1).hX;
+                            alltotalZero += strokiList.ElementAt(iterator1).h0;
                         }
 
-                        Console.WriteLine();
-
-                        //  Console.WriteLine(Xcount + "  " + zeroCount);
-                        //Console.WriteLine(result?"TRUE":"FALSE");
-
-
-                        Console.WriteLine();
-
-                        continue;
-                        var inputSet = file.ReadLine().Split(" ");
-
-                    var row_count = int.Parse(inputSet[0]);
-                    var columns_count = int.Parse(inputSet[1]);
-
-                    var howmManyBlocksinString = new int[row_count];
-                    var minimumBlockIndex = new int[row_count];
-                    var maximumBlockIndex = new int[row_count];
-                    var twoorMoreBlocks = new bool[row_count];
-
-                    for (int row = 0; row < row_count; row++)
-                    {
-                        howmManyBlocksinString[row] = 0;
-                        minimumBlockIndex[row] = -1;
-                        maximumBlockIndex[row] = -1;
-                        twoorMoreBlocks[row] = false;
-                    }
-
-                    char[,] mainArray = new char[row_count, columns_count];
-
-                    int[] howmanyblocks = new int[columns_count];
-
-                    for (int j = 0; j < columns_count; j++)
-                    {
-                        howmanyblocks[j] = 0;
-                    }
-
-                    for (int j = 0; j < row_count; j++)
-                    {
-                        var stroka = file.ReadLine();
-
-                        for (int k = 0; k < columns_count; k++)
+                        if ((diagonal1.hX == 3) || (diagonal2.hX == 3))
                         {
-                            var simbolk = (char)stroka[k];
-
-                            mainArray[j, k] = (char)
-                            '.';
-
-                            if (simbolk == (char)
-                              '*')
+                            if (alltotalZero > alltotalX - 1)
                             {
-                                howmanyblocks[k]++;
-                            }
-                        }
-                    }
-
-                    for (var k = 0; k < columns_count; k++)
-                    {
-                        var bloksinstopbec = howmanyblocks[k];
-                        for (int j = 0; j < bloksinstopbec; j++)
-                        {
-                            mainArray[j, k] = (char)
-                            '*';
-
-                            howmManyBlocksinString[j]++;
-                            if (minimumBlockIndex[j] == -1)
-                            {
-                                minimumBlockIndex[j] = k;
-                            }
-                            maximumBlockIndex[j] = k;
-
-                            if (howmManyBlocksinString[j] >= 2)
-                            {
-                                twoorMoreBlocks[j] = true;
+                                result = false;
                             }
                         }
 
-                    }
-
-                    // заполняем водой.
-
-                    for (int row = 0; row < row_count; row++) // количество строк
-                    {
-
-                        if ((twoorMoreBlocks[row] == false) ||
-                          (maximumBlockIndex[row] == minimumBlockIndex[row] + 1)
-                        )
+                        if ((diagonal1.h0 == 3) || (diagonal2.h0 == 3))
                         {
-                            break;
-                        }
-
-                        for (int col = 1; col < columns_count - 1; col++) // количество столбцов
-                        {
-                            if (
-                              (mainArray[row, col] == (char)
-                                '*')
-                            )
+                            if (alltotalZero > alltotalX)
                             {
-                                continue;
+                                result = false;
                             }
-
-                            if (
-                              (col > minimumBlockIndex[row]) &&
-                              (col < maximumBlockIndex[row]))
-                            {
-                                mainArray[row, col] = '~';
-                            }
-
                         }
-                    }
 
-
-                    // выводим на экран с водой
-                    for (int j = row_count - 1; j >= 0; j--) // количество строк
-                    {
-                        char[] strout = new char[columns_count];
-                        for (int k = 0; k < columns_count; k++) // количество столбцов
+                        if (result)
                         {
-                            strout[k] = mainArray[j, k];
-                        }
+                            for (var iterator1 = 0; iterator1 < 3; iterator1++)
+                            {
 
-                        Console.WriteLine(String.Join("", strout));
+                                if (alltotalX > alltotalZero + 1)
+                                {
+                                    result = false;
+                                    break;
+                                }
+                                else
+                                if (alltotalZero > alltotalX)
+                                {
+                                    result = false;
+                                    break;
+                                }
+
+                                if (strokiList.ElementAt(iterator1).hX == 3)
+                                {
+                                    if (alltotalX == alltotalZero)
+                                    {
+                                        result = false;
+                                        break;
+                                    }
+                                }
+
+                                if (stolbciList.ElementAt(iterator1).hX == 3)
+                                {
+                                    if (alltotalX == alltotalZero)
+                                    {
+                                         result = false;
+
+                                        break;
+                                    }
+
+                                    if (alltotalX + alltotalZero >= 8)
+
+                                    {
+                                        result = false;
+                                        break;
+                                    }
+                                }
+                                if (!result)
+                                    break;
+                            }
+                        }
+                        Console.WriteLine(result ? "YES" : "NO");
                     }
-                    Console.WriteLine();
                 }
             }
         }
-    }
     }
 }
