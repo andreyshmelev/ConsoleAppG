@@ -2,6 +2,36 @@
 public class Program
 {
 
+    public static bool strokaIliStolbeccheck(char[] stroka)
+    {
+        return true;
+    }
+
+    public struct Line
+    {
+
+        public int hX = 0;
+        public int h0 = 0;
+
+        public Line(int howManyCrosses, int howManyZeros)
+        {
+            hX = howManyCrosses;
+            h0 = howManyZeros;
+        }
+    }
+    public struct Stolbik
+    {
+
+        public int hX = 0;
+        public int h0 = 0;
+
+        public Stolbik(int howManyCrosses, int howManyZeros)
+        {
+            hX = howManyCrosses;
+            h0 = howManyZeros;
+        }
+    }
+
     public static void Main(string[] args)
     {
         using (StreamReader file = new StreamReader("C:\\Users\\Brux\\Downloads\\testG\\tests\\01"))
@@ -16,14 +46,29 @@ public class Program
                     if (string.IsNullOrEmpty(file.ReadLine()))
 
                     {
+                        List<Line> strokiList = new List<Line>();
+                        List<Stolbik> stolbikiList = new List<Stolbik>();
+
+                        bool result = true;
+
                         char[,] gameAray = new char[3, 3];
 
                         var Xcount = 0;
-                        var Ocount = 0;
+                        var zeroCount = 0;
+
+                        Stolbik stolb0 = new Stolbik(0, 0);
+                        Stolbik stolb1 = new Stolbik(0, 0);
+                        Stolbik stolb2 = new Stolbik(0, 0);
+
 
                         for (int row = 0; row < 3; row++)
                         {
                             string inputsrt = (file.ReadLine());
+                            
+                            // проверяем каждую строку и создаем структуру строки
+
+                            Line linenew = new Line(0, 0);
+
                             for (int column = 0; column < 3; column++)
                             {
                                 char inputchar = inputsrt[column];
@@ -32,18 +77,68 @@ public class Program
                                 switch (inputchar)
                                 {
                                     case 'X':
-                                        Xcount++;
+                                        linenew.hX++;
+
+                                        if (column == 0)
+                                        {
+                                            stolb0.hX++;
+                                        }
+                                        else
+                                             if (column == 1)
+                                        {
+                                            stolb1.hX++;
+                                        }
+                                        else
+                                             if (column == 2)
+                                        {
+                                            stolb2.hX++;
+                                        }
+
+
                                         break;
 
-                                    case 'O':
-                                        Ocount++;
+                                    case '0':
+                                        linenew.h0++;
+                                        if (column == 0)
+                                        {
+                                            stolb0.h0++;
+                                        }
+                                        else
+                                            if (column == 1)
+                                        {
+                                            stolb1.h0++;
+                                        }
+                                        else
+                                            if (column == 2)
+                                        {
+                                            stolb2.h0++;
+                                        }
                                         break;
                                 }
-                                Console.Write(gameAray[row, column]);
+
+                                /* if  (   (Xcount > zeroCount + 1)
+                                     ||  (Xcount + 1 < zeroCount)
+                                     ||  (Xcount == zeroCount)
+                                     )
+                                         {
+                                     result = false;
+                                 }*/
+
+                                //Console.Write(gameAray[row, column
                             }
 
-                            Console.WriteLine();
+                            Console.WriteLine(String.Join(" ", inputsrt));
+
+
+                            //Console.WriteLine("Xcount" + Xcount);
+
+                            //strokiList.Add(new Line(Xcount, zeroCount));
+                            //Console.WriteLine("strokiList " + strokiList.Count);
                         }
+
+                      //  Console.WriteLine(Xcount + "  " + zeroCount);
+                        //Console.WriteLine(result?"TRUE":"FALSE");
+
 
                         Console.WriteLine();
 
